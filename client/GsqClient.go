@@ -15,3 +15,7 @@ func NewGsqClient() *GsqClient {
 func (gsqClient *GsqClient) Publish(topicName string, messgae string) error {
 	return gsqClient.gsqd.Publish(topicName, messgae)
 }
+
+func (gsqClient *GsqClient) Subscribr(topicName string, channelName string) error {
+	return gsqClient.gsqd.Subscribe(topicName, channelName)
+}

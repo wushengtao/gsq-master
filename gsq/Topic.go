@@ -6,8 +6,12 @@ type Topic struct {
 	channelMap map[string]*Channel
 }
 
-func (topic *Topic) NewTopic(name string) *Topic {
+func NewTopic(name string) *Topic {
 	return &Topic{
 		name: name,
 	}
+}
+
+func (topic *Topic) GetChannelMap() map[string]*Channel {
+	return topic.channelMap
 }

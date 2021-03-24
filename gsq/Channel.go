@@ -4,5 +4,11 @@ import "sync"
 
 type Channel struct {
 	sync.RWMutex
-	channelName string
+	MemoryMsgChan chan *Message
+}
+
+func NewChannel() *Channel {
+	return &Channel{
+		MemoryMsgChan: make(chan *Message, 100),
+	}
 }
