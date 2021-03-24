@@ -1,6 +1,9 @@
 package gsq
 
+import "sync"
+
 type Gsqd struct {
+	sync.RWMutex
 	//topics
 	topicMap map[string]*Topic
 	//消费队列
@@ -12,13 +15,15 @@ func (gsqd *Gsqd) Publish(topicName string, msg interface{}) error {
 	topic := gsqd.topicMap[topicName]
 	if topic == nil {
 		//创建topic
+		gsqd.Lock()
 		topic = topic.NewTopic(topicName)
+		gsqd.Unlock()
+
 	}
 	return nil
 
 }
 
-//订阅消息
 func Subscribe(topicName string, channelName string) error {
 	return nil
 }
