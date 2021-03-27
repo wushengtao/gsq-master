@@ -7,8 +7,11 @@ type Topic struct {
 }
 
 func NewTopic(name string) *Topic {
+	channelMap := make(map[string]*Channel)
+	channelMap["c1"] = NewChannel()
 	return &Topic{
-		name: name,
+		name:       name,
+		channelMap: channelMap,
 	}
 }
 

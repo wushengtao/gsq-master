@@ -16,11 +16,20 @@ type Gsqd struct {
 	//inFlightMessages map[string]*Message
 }
 
+func NewGsqd() *Gsqd {
+	topicMap := make(map[string]*Topic)
+	topicMap["create"] = NewTopic("create")
+	return &Gsqd{
+		exit:     make(chan bool, 1),
+		topicMap: make(map[string]*Topic),
+	}
+}
+
 func (gsqd *Gsqd) Publish(topicName string, msg string) error {
 	//判断是否关闭
 	select {
 	case <-gsqd.exit:
-		return errors.New("")
+		return errors.New("gsqd close")
 	default:
 
 	}
@@ -59,6 +68,7 @@ func (gsqd *Gsqd) Subscribe(topicName string, channelName string) error {
 		default:
 			fmt.Println("continue")
 		}
+		time.Sleep(3 * time.Second)
 
 	}
 

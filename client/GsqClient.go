@@ -6,9 +6,9 @@ type GsqClient struct {
 	gsqd *gsq.Gsqd
 }
 
-func NewGsqClient() *GsqClient {
+func NewGsqClient(gsqd *gsq.Gsqd) *GsqClient {
 	return &GsqClient{
-		gsqd: &gsq.Gsqd{},
+		gsqd: gsqd,
 	}
 }
 
@@ -16,6 +16,6 @@ func (gsqClient *GsqClient) Publish(topicName string, messgae string) error {
 	return gsqClient.gsqd.Publish(topicName, messgae)
 }
 
-func (gsqClient *GsqClient) Subscribr(topicName string, channelName string) error {
+func (gsqClient *GsqClient) Subscribe(topicName string, channelName string) error {
 	return gsqClient.gsqd.Subscribe(topicName, channelName)
 }
